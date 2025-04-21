@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { notes } from "./notes";
+import { notes } from "./notes.js";
 
 const router = Router();
 
@@ -56,3 +56,5 @@ router.delete("/api/notes/:id", (req, res) => {
     res.status(404).send("Note not found");
   }
 });
+
+export default router;
