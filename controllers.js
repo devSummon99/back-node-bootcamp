@@ -4,7 +4,7 @@ import {
   getNoteByIDService,
   removeNoteService,
   updateNoteService,
-} from "./services";
+} from "./services.js";
 
 export const getAllNotes = (req, res) => {
   const allNotes = getAllNotesService();
@@ -26,15 +26,15 @@ export const getNoteByID = (req, res) => {
 };
 
 export const createNote = (req, res) => {
-  const data = res.body;
-  const newNota = createNoteService(data);
+    const {title, content} = req.body;
+  const newNota = createNoteService({title, content});
   return res.json(newNota).status(201);
 };
 
 export const updatedNote = (req, res) => {
   const id = Number(req.params.id);
-  const data = req.body;
-  const dataUpdated = updateNoteService(data, id);
+  const {title, content} = req.body;
+  const dataUpdated = updateNoteService({title, content}, id);
   if (dataUpdated) {
     return res.json(dataUpdated).status(200);
   } else {

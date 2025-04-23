@@ -1,4 +1,4 @@
-import notes from "./notes.js"
+import {notes} from "./notes.js"
 
 export const getAllNotesService = () => {
 return notes;
@@ -9,20 +9,23 @@ return findNote;
 }
 export const createNoteService = (data) => {
     const { title, content } = data;
-    const ids = notes.map(note => note.id);
-    const maxID = Math.max(ids);
+    const ids = notes.map((note) => note.id);
+    const maxID = Math.max(...ids);
+    console.log(maxID)
     const newNote = {
         id: maxID + 1,
         title: title,
         content: content, 
-        date: new Date().toISOString()
+        createdAt : new Date(),
+        updatedAt: new Date()
     }
-    return notes = notes.concat(newNote);
+    return notes.push(newNote);
 }
 export const updateNoteService = (data, id) => {
+    const { title, content } = data;
     const findNote = notes.find((note) => note.id = id);
     if(findNote) {
-        Object.assign( findNote, data);
+        Object.assign( findNote, { title, content });
         return findNote;
     }else return null;
     

@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { request, response, Router } from "express";
 
 import {
   createNote,
@@ -10,18 +10,16 @@ import {
 
 const router = Router();
 
-router.get("/", (req, res) => {
-  res.send("Hello World!");
-});
 
-router.get("/api/notes", getAllNotes(req, res));
 
-router.get("/api/notes/:id", getNoteByID(req, res));
+router.get("/api/notes", getAllNotes);
 
-router.post("/api/notes", createNote(req, res));
+router.get("/api/notes/:id", getNoteByID);
 
-router.put("/api/notes/:id", updatedNote(req, res));
+router.post("/api/notes", createNote);
 
-router.delete("/api/notes/:id", removeNote(req, res));
+router.put("/api/notes/:id", updatedNote);
+
+router.delete("/api/notes/:id", removeNote);
 
 export default router;
